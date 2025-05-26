@@ -20,10 +20,10 @@ export async function downloadFromS3(file_key: string): Promise<string> {
 
       const obj = await s3.getObject(params);
       // Use OS's temp directory
-      const tmpDir = os.tmpdir();
+      const tmpDir = 'D:\\tempo';
       // Ensure the directory exists
       fs.mkdirSync(tmpDir, { recursive: true });
-      const file_name = path.join(tmpDir, `corall${Date.now().toString()}.pdf`);
+      const file_name = path.join(tmpDir, `r${Date.now().toString()}.pdf`);
 
       if (obj.Body instanceof require("stream").Readable) {
         const file = fs.createWriteStream(file_name);
