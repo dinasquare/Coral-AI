@@ -11,7 +11,7 @@ export async function getEmbeddings(text: string) {
   try {
     // Get the generative model
     const embeddingModel = genAI.getGenerativeModel({ 
-      model: "embedding-001" // Gemini's embedding model
+      model: "text-embedding-004" // Gemini's embedding model
     });
     
     // Generate embeddings

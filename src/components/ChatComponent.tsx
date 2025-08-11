@@ -30,7 +30,7 @@ const ChatComponent = ({ chatId }: Props) => {
     initialMessages: data || [],
   });
   React.useEffect(() => {
-    const messageContainer = document.getElementById("message-container");
+    const messageContainer = document.querySelector(".flex-1.overflow-y-auto");
     if (messageContainer) {
       messageContainer.scrollTo({
         top: messageContainer.scrollHeight,
@@ -40,7 +40,7 @@ const ChatComponent = ({ chatId }: Props) => {
   }, [messages]);
   return (
     <div
-      className="relative max-h-screen overflow-scroll"
+      className="relative h-screen overflow-hidden flex flex-col"
       id="message-container"
     >
       {/* header */}
@@ -49,11 +49,13 @@ const ChatComponent = ({ chatId }: Props) => {
       </div>
 
       {/* message list */}
-      <MessageList messages={messages} isLoading={isLoading} />
+      <div className="flex-1 overflow-y-auto">
+        <MessageList messages={messages} isLoading={isLoading} />
+      </div>
 
       <form
         onSubmit={handleSubmit}
-        className="sticky bottom-0 inset-x-0 px-2 py-4 bg-white"
+        className="sticky bottom-0 inset-x-0 px-2 py-4 bg-white border-t"
       >
         <div className="flex">
           <Input

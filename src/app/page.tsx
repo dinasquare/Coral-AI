@@ -1,20 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { auth } from "@clerk/nextjs/server";
-import { UserButton } from "@clerk/nextjs";
-import Image from "next/image";
-import  Link  from "next/link";
-import { LogIn } from "lucide-react";
+import { UserButton} from "@clerk/nextjs";
+import Link from "next/link";
+import { ArrowRight, LogIn } from "lucide-react";
 import FileUpload from "@/components/FileUpload";
 
+import { db } from "@/lib/db";
+import { chats } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
+
 export default async function Home() {
-  const authResult = await auth();
-  console.log("Auth result:", authResult); // Check what auth() returns
-  
-  const { userId } = authResult;
-  console.log("User ID:", userId); // Check if userId exists
-  
+  const { userId } = await auth();
   const isAuth = !!userId;
-  console.log("Is authenticated:", isAuth); // Check final auth state
+  let firstChat;
+  if (userId) {
+    firstChat = await db.select().from(chats).where(eq(chats.userId, userId));
+    if (firstChat) {
+      firstChat = firstChat[0];
+    }
+  }
+
   
   return (
     <div className="w-screen min-h-screen bg-gradient-to-tr from-violet-500 to-orange-300">
@@ -24,8 +29,16 @@ export default async function Home() {
             <h1 className="mr-3 text-5xl font-semibold">Chat with any PDF</h1>
             <UserButton afterSignOutUrl="/" />
           </div>
-          <div className="flex mt-2">
-            {isAuth && <Button className="cursor-pointer mt-2">Go to Chat</Button>}
+
+          {isAuth && firstChat && (
+              <>
+                <Link href={`/chat/${firstChat.id}`}>
+                  <Button>
+                    Go to Chats <ArrowRight className="ml-2" />
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           <p className=" max-w-xl mt-1 text-lg text-slate-600">
@@ -46,6 +59,5 @@ export default async function Home() {
           {/* add images */}
         </div>
       </div>
-    </div>
   );
 }
