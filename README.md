@@ -32,8 +32,6 @@ The application is built with a modern tech stack, featuring a Next.js frontend 
 |                   | Pinecone              | A vector database used for efficient similarity searches on the generated embeddings. |
 | **Infrastructure**| AWS S3                | Provides secure and scalable cloud storage for uploaded PDF files.             |
 |                   | Clerk                 | Handles user authentication, session management, and user profiles.            |
-|                   | Vercel                | The platform for deploying and hosting the Next.js application.                |
-| **Payments** | Stripe                | Manages subscription billing and payments for pro features.                    |
 
 ## Getting Started
 
@@ -47,7 +45,6 @@ To get a local copy up and running, follow these simple steps.
 -   A Google Generative AI API key
 -   A Clerk account for authentication
 -   A Neon account for the database
--   A Stripe account and API keys
 
 ### Installation
 
@@ -72,14 +69,6 @@ To get a local copy up and running, follow these simple steps.
 
 5.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Deployment
-
-The easiest way to deploy this Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdinasquare%2FCoral-AI)
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## License
-
 Distributed under the MIT License. See `LICENSE` for more information.
